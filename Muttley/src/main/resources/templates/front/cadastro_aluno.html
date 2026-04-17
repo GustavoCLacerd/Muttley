@@ -4,73 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Cadastro</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/front/muttley-front.css}">
+    <link rel="stylesheet" href="/Muttley/src/main/resources/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Muttley/src/main/resources/static/css/front/muttley-front.css">
 </head>
 <body>
-<main class="container py-4">
-    <section class="card shadow-sm mb-4">
-        <div class="card-body d-flex flex-wrap justify-content-between gap-2">
-            <h1 class="h3 m-0">Novo Cadastro</h1>
-            <a class="btn btn-outline-secondary" href="/">Voltar ao menu</a>
-        </div>
-    </section>
+<main class="container py-4 muttley-page">
+    <section class="card shadow-sm muttley-shell">
+        <div class="card-body">
+            <header class="muttley-header mb-4">
+                <h1 class="h4 mb-0">Aluno</h1>
+            </header>
 
-    <section class="row g-4">
-        <div class="col-lg-7">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h2 class="h5 mb-3">Dados do Aluno</h2>
-                    <form th:action="@{/alunos/salvar}" th:object="${aluno}" method="post" class="row g-3">
-                        <div class="col-md-6">
-                            <label for="cpf" class="form-label">CPF</label>
-                            <input id="cpf" th:field="*{cpf}" class="form-control" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="ra" class="form-label">R.A.</label>
-                            <input id="ra" th:field="*{ra}" class="form-control">
-                        </div>
+            <form th:action="@{/alunos/salvar}" th:object="${aluno}" method="post" class="muttley-form-grid">
+                <label for="nome" class="form-label mb-0">Nome</label>
+                <input id="nome" th:field="*{nome}" class="form-control" required>
 
-                        <div class="col-12">
-                            <label for="nome" class="form-label">Nome</label>
-                            <input id="nome" th:field="*{nome}" class="form-control" required>
-                        </div>
+                <label for="cpf" class="form-label mb-0">CPF</label>
+                <input id="cpf" th:field="*{cpf}" class="form-control" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" required>
 
-                        <div class="col-md-6">
-                            <label for="curso" class="form-label">Curso</label>
-                            <input id="curso" th:field="*{curso}" class="form-control" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="email" class="form-label">Email</label>
-                            <input id="email" th:field="*{email}" class="form-control" type="email">
-                        </div>
+                <label for="curso" class="form-label mb-0">Curso</label>
+                <input id="curso" th:field="*{curso}" class="form-control" required>
 
-                        <div class="col-12 d-flex gap-2 pt-2">
-                            <button class="btn btn-primary" type="submit">Salvar</button>
-                            <button class="btn btn-outline-secondary" type="button" disabled>Editar</button>
-                            <button class="btn btn-outline-danger" type="button" disabled>Excluir</button>
-                        </div>
-                    </form>
+                <label for="email" class="form-label mb-0">EMAIL</label>
+                <input id="email" th:field="*{email}" class="form-control" type="email">
+
+                <div class="muttley-actions">
+                    <button class="btn btn-muttley-primary" type="submit">Salvar</button>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-lg-5">
-            <div class="card shadow-sm h-100">
-                <div class="card-body">
-                    <h2 class="h5">Resumo</h2>
-                    <p class="text-muted mb-2">Campos inspirados no layout de referencia do PDF.</p>
-                    <ul class="small text-muted mb-0">
-                        <li>Nome</li>
-                        <li>CPF</li>
-                        <li>R.A.</li>
-                        <li>Curso</li>
-                        <li>Email</li>
-                    </ul>
-                </div>
-            </div>
+            </form>
         </div>
     </section>
 </main>
+<script>
+    const cpfInput = document.getElementById("cpf");
+
+    const aplicarMascaraCpf = (valor) => {
+        const numeros = valor.replace(/\D/g, "").slice(0, 11);
+        return numeros
+            .replace(/^(\d{3})(\d)/, "$1.$2")
+            .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+            .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+    };
+
+    if (cpfInput) {
+        const aplicarNoCampoCpf = () => {
+            cpfInput.value = aplicarMascaraCpf(cpfInput.value);
+        };
+
+        aplicarNoCampoCpf();
+        cpfInput.addEventListener("input", aplicarNoCampoCpf);
+    }
+</script>
 </body>
 </html>
