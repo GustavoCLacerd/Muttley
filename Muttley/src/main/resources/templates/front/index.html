@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Muttley</title>
+    <link rel="stylesheet" href="/Muttley/src/main/resources/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Muttley/src/main/resources/static/css/front/muttley-front.css">
+</head>
+<body>
+<main class="container py-4 muttley-page">
+    <section class="card shadow-sm muttley-shell">
+        <div class="card-body">
+            <header class="muttley-header mb-4">
+                <h1 class="h4 mb-0">Menu Muttley</h1>
+            </header>
+
+            <form action="/alunos/buscar" method="get" class="muttley-form-grid muttley-form-grid--home">
+                <label for="nomeBusca" class="form-label mb-0">Nome</label>
+                <input id="nomeBusca" class="form-control" placeholder="">
+
+                <label for="cpfBusca" class="form-label mb-0">CPF</label>
+                <input id="cpfBusca" name="cpf" class="form-control" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" required>
+                <br>
+                <div class="muttley-actions muttley-actions--home">
+                    <div class="muttley-actions-search">
+                        <button class="btn btn-primary ms-auto" type="submit">Buscar</button>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="muttley-actions-secondary">
+                        <button class="btn btn-primary ms-auto" type="button">Importar Lista</button>
+                        <a class="btn btn-primary ms-auto" href="/alunos/novo" type="button">Novo Cadastro</a>
+                        <a class="btn btn-primary ms-auto" href="/eventos/novo" type="button">Novo Evento</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+<script>
+    const cpfBuscaInput = document.getElementById("cpfBusca");
+
+    const aplicarMascaraCpf = (valor) => {
+        const numeros = valor.replace(/\D/g, "").slice(0, 11);
+        return numeros
+            .replace(/^(\d{3})(\d)/, "$1.$2")
+            .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+            .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+    };
+
+    if (cpfBuscaInput) {
+        cpfBuscaInput.addEventListener("input", (event) => {
+            event.target.value = aplicarMascaraCpf(event.target.value);
+        });
+    }
+</script>
+</body>
+</html>
