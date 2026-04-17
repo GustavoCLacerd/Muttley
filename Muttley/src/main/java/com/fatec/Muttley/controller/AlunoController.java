@@ -25,7 +25,7 @@ public class AlunoController {
     @PostMapping("/salvar")
     public String salvarAluno(@ModelAttribute Aluno aluno) {
         alunoRepository.save(aluno);
-        return "redirect:/alunos/menu"; // Volta para o menu principal
+        return "redirect:/"; // Volta para o menu principal
     }
 
     // Rota para buscar por CPF (como no botão 'Buscar' do Figma)

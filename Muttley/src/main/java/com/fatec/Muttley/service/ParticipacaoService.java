@@ -17,27 +17,32 @@ public class ParticipacaoService {
     @Autowired
     private AlunoRepository alunoRepository;
 
+    @Autowired
+    private MedalhaService medalhaService;
+
     @Transactional
     public Participacao registrarParticipacao(Participacao participacao) {
         // 1. Salva a participação no banco
         participacao.setDataParticipacao(LocalDate.now());
+        if (!participacao.validarParticipacao()) {
+            throw new IllegalArgumentException("Participacao invalida: aluno e evento sao obrigatorios.");
+        }
         Participacao salva = participacaoRepository.save(participacao);
 
         // 2. Calcula os pontos com base no tipo de evento (Herança)
         Evento evento = salva.getEvento();
-        Integer pontosGanhos = evento.calcularPontos(salva.getHoras());
+        Integer pontosGanhos = evento.calcularPontos();
+        if (pontosGanhos == null || pontosGanhos < 0) {
+            pontosGanhos = 0;
+        }
 
         // 3. Atualiza o saldo do Aluno conforme o Tipo de Skill do evento
         Aluno aluno = salva.getAluno();
-        if (evento.getTipoSkill() == TipoSkill.HARD_SKILL) {
-            aluno.setSaldoHardSkill(aluno.getSaldoHardSkill() + pontosGanhos);
-        } else {
-            aluno.setSaldoSoftSkill(aluno.getSaldoSoftSkill() + pontosGanhos);
-        }
+        aluno.adicionarPontos(pontosGanhos, evento.getTipoSkill());
 
         alunoRepository.save(aluno);
-        
-        // Aqui poderíamos chamar a verificação de medalhas futuramente
+        medalhaService.verificarNovasMedalhas(aluno);
+
         return salva;
     }
 }

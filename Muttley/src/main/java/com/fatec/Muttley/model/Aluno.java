@@ -40,4 +40,21 @@ public class Aluno {
     public void setSaldoHardSkill(Integer saldoHardSkill) { this.saldoHardSkill = saldoHardSkill; }
     public Integer getSaldoSoftSkill() { return saldoSoftSkill; }
     public void setSaldoSoftSkill(Integer saldoSoftSkill) { this.saldoSoftSkill = saldoSoftSkill; }
+
+    public Integer getSaldoTotal() {
+        return (saldoHardSkill == null ? 0 : saldoHardSkill) + (saldoSoftSkill == null ? 0 : saldoSoftSkill);
+    }
+
+    public void adicionarPontos(Integer pontos, TipoSkill tipo) {
+        if (pontos == null || pontos <= 0 || tipo == null) {
+            return;
+        }
+
+        if (tipo == TipoSkill.HARD_SKILL) {
+            this.saldoHardSkill = (saldoHardSkill == null ? 0 : saldoHardSkill) + pontos;
+        } else {
+            this.saldoSoftSkill = (saldoSoftSkill == null ? 0 : saldoSoftSkill) + pontos;
+        }
+    }
+
 }

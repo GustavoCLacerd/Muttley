@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentacao do Front - Muttley</title>
+    <style>
+        :root {
+            --bg: #f4f7fb;
+            --card: #ffffff;
+            --text: #1f2937;
+            --muted: #4b5563;
+            --line: #d6deea;
+            --primary: #2563eb;
+            --ok: #0f766e;
+            --warn-bg: #fff7ed;
+            --warn-border: #fdba74;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(180deg, #f7f9fc 0%, #eef3f9 100%);
+            color: var(--text);
+            line-height: 1.55;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .hero {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+            margin-bottom: 18px;
+        }
+
+        h1, h2, h3 {
+            margin: 0 0 10px 0;
+            line-height: 1.25;
+        }
+
+        h1 { font-size: 1.8rem; }
+        h2 { font-size: 1.35rem; margin-top: 24px; }
+        h3 { font-size: 1.05rem; margin-top: 16px; }
+
+        .subtitle { color: var(--muted); margin: 0; }
+
+        .section {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 14px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 10px;
+            font-size: 0.83rem;
+            border-radius: 999px;
+            border: 1px solid #bfdbfe;
+            background: #eff6ff;
+            color: #1d4ed8;
+            margin-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 12px;
+            background: #fbfdff;
+        }
+
+        .card p { margin: 6px 0; }
+
+        ul {
+            margin: 8px 0 0 22px;
+            padding: 0;
+        }
+
+        li { margin-bottom: 6px; }
+
+        code {
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+            border-radius: 6px;
+            padding: 1px 6px;
+            font-family: Consolas, monospace;
+            font-size: 0.92rem;
+        }
+
+        pre {
+            margin: 10px 0;
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 10px;
+            padding: 12px;
+            overflow: auto;
+            border: 1px solid #1e293b;
+        }
+
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .step {
+            border-left: 4px solid var(--primary);
+            background: #f8fbff;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+        }
+
+        .note {
+            border: 1px solid var(--warn-border);
+            background: var(--warn-bg);
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .ok {
+            border: 1px solid #99f6e4;
+            background: #f0fdfa;
+            color: #115e59;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .footer {
+            color: var(--muted);
+            font-size: 0.9rem;
+            text-align: center;
+            margin: 20px 0 6px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="hero">
+        <h1>Documentacao do Front - Projeto Muttley</h1>
+        <p class="subtitle">
+            Este material foi feito em duas partes: primeiro uma explicacao didatica para quem nao domina HTML,
+            e depois uma explicacao tecnica para o time de backend.
+        </p>
+    </header>
+
+    <section class="section">
+        <span class="tag">Parte 1 - Explicacao didatica (HTML basico)</span>
+        <h2>1) O que foi feito no front</h2>
+        <p>
+            Foram implementadas duas telas principais:
+        </p>
+        <ul>
+            <li><strong>Tela inicial</strong> em <code>src/main/resources/static/index.html</code></li>
+            <li><strong>Tela de novo cadastro</strong> em <code>src/main/resources/templates/cadastro_aluno.html</code></li>
+        </ul>
+        <p>
+            O estilo visual das duas telas foi centralizado em:
+            <code>src/main/resources/static/css/front/muttley-front.css</code>
+        </p>
+
+        <h3>2) Estrutura simples de cada tela</h3>
+        <div class="grid">
+            <div class="card">
+                <h3>Tela inicial</h3>
+                <p>Tem os campos <strong>Nome</strong> e <strong>CPF</strong>.</p>
+                <p>Botoes: <strong>Buscar</strong>, <strong>Importar Lista</strong>, <strong>Novo Cadastro</strong>, <strong>Novo Evento</strong>.</p>
+                <p>O CPF tem mascara <code>000.000.000-00</code>.</p>
+            </div>
+            <div class="card">
+                <h3>Tela novo cadastro</h3>
+                <p>Tem os campos <strong>Nome</strong>, <strong>CPF</strong>, <strong>Curso</strong>, <strong>Email</strong>.</p>
+                <p>Botao principal: <strong>Salvar</strong>.</p>
+                <p>Tambem usa mascara de CPF.</p>
+            </div>
+        </div>
+
+        <h3>3) O que significam as partes do HTML</h3>
+        <ul>
+            <li><code>&lt;form&gt;</code>: bloco que envia dados para o backend.</li>
+            <li><code>action="..."</code>: para onde os dados vao.</li>
+            <li><code>method="get|post"</code>: tipo de envio.</li>
+            <li><code>&lt;input&gt;</code>: campo para digitar dados.</li>
+            <li><code>name="cpf"</code>: nome da variavel que o backend vai receber.</li>
+            <li><code>&lt;button type="submit"&gt;</code>: envia o formulario.</li>
+        </ul>
+
+        <h3>4) Exemplo simples da tela inicial</h3>
+        <pre><code>&lt;form action="/alunos/buscar" method="get"&gt;
+  &lt;input id="cpfBusca" name="cpf" required&gt;
+  &lt;button type="submit"&gt;Buscar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+        <p>
+            Em palavras simples: quando o usuario clica em Buscar, o navegador chama a rota
+            <code>/alunos/buscar</code> enviando o CPF.
+        </p>
+
+        <h3>5) Mascara de CPF (front)</h3>
+        <p>
+            Foi adicionado JavaScript para formatar o CPF enquanto o usuario digita.
+            Exemplo: <code>12345678901</code> vira <code>123.456.789-01</code>.
+        </p>
+        <div class="note">
+            A mascara melhora a experiencia do usuario, mas o backend continua validando os dados.
+        </div>
+    </section>
+
+    <section class="section">
+        <span class="tag">Parte 2 - Explicacao tecnica para devs backend</span>
+        <h2>6) Como o front conversa com o backend</h2>
+        <p>
+            O projeto usa Spring Boot MVC com mix de pagina estatica + template Thymeleaf.
+        </p>
+
+        <div class="step"><strong>Fluxo A - Home:</strong> <code>/</code> entrega <code>static/index.html</code>.</div>
+        <div class="step"><strong>Fluxo B - Ir para cadastro:</strong> link para <code>/alunos/novo</code>, controller retorna <code>cadastro_aluno</code>.</div>
+        <div class="step"><strong>Fluxo C - Salvar:</strong> form do cadastro envia <code>POST /alunos/salvar</code> com bind em <code>@ModelAttribute Aluno</code>.</div>
+        <div class="step"><strong>Fluxo D - Buscar:</strong> form da home envia <code>GET /alunos/buscar?cpf=...</code>.</div>
+
+        <h3>7) Objetos e variaveis que entram no bind</h3>
+        <p>No template de cadastro:</p>
+        <pre><code>&lt;form th:action="@{/alunos/salvar}" th:object="${aluno}" method="post"&gt;
+  &lt;input th:field="*{nome}"&gt;
+  &lt;input th:field="*{cpf}"&gt;
+  &lt;input th:field="*{curso}"&gt;
+  &lt;input th:field="*{email}"&gt;
+  &lt;input th:field="*{ra}" type="hidden"&gt;
+&lt;/form&gt;</code></pre>
+
+        <p>Significado tecnico:</p>
+        <ul>
+            <li><code>th:object="${aluno}"</code> define contexto de bind do model.</li>
+            <li><code>th:field</code> faz binding automatico para propriedades do DTO/entidade.</li>
+            <li><code>ra</code> esta oculto no front, mas continua sendo enviado no POST.</li>
+            <li>Script da pagina sincroniza RA com o CPF numerico para atender validacao atual de backend.</li>
+        </ul>
+
+        <h3>8) Relacao com controller atual</h3>
+        <p>Controller principal do fluxo de telas: <code>AlunoController</code>.</p>
+        <ul>
+            <li><code>GET /alunos/novo</code> -> injeta <code>new Aluno()</code> no model e retorna <code>cadastro_aluno</code>.</li>
+            <li><code>POST /alunos/salvar</code> -> recebe <code>@ModelAttribute Aluno</code>, valida RA, persiste e redireciona.</li>
+            <li><code>GET /alunos/buscar</code> -> recebe parametro <code>cpf</code>.</li>
+        </ul>
+
+        <h3>9) Contrato front-back (resumo objetivo)</h3>
+        <div class="grid">
+            <div class="card">
+                <h3>Home</h3>
+                <p><strong>Input enviado:</strong> <code>cpf</code></p>
+                <p><strong>Endpoint:</strong> <code>GET /alunos/buscar</code></p>
+            </div>
+            <div class="card">
+                <h3>Cadastro</h3>
+                <p><strong>Inputs enviados:</strong> <code>nome</code>, <code>cpf</code>, <code>curso</code>, <code>email</code>, <code>ra</code></p>
+                <p><strong>Endpoint:</strong> <code>POST /alunos/salvar</code></p>
+            </div>
+            <div class="card">
+                <h3>Render de template</h3>
+                <p><strong>Requisito:</strong> model conter atributo <code>aluno</code></p>
+                <p><strong>Template:</strong> <code>cadastro_aluno.html</code></p>
+            </div>
+        </div>
+
+        <h3>10) Boas praticas aplicadas no front</h3>
+        <ul>
+            <li>Separacao de estilo em CSS dedicado.</li>
+            <li>Hierarquia visual de botoes (primario, secundario, perigo).</li>
+            <li>Estados de foco visiveis (acessibilidade).</li>
+            <li>Campos com placeholders e mascara de CPF.</li>
+            <li>Layout responsivo basico para telas menores.</li>
+        </ul>
+
+        <div class="ok">
+            Resultado: o front esta pronto para o fluxo atual de cadastro/busca e com contrato claro para evolucao do backend.
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>11) Como apresentar isso para o time em 1 minuto</h2>
+        <ol>
+            <li>Mostrar as duas telas e dizer qual e estatica e qual e Thymeleaf.</li>
+            <li>Explicar que formulario da home chama <code>/alunos/buscar</code>.</li>
+            <li>Explicar que formulario de cadastro faz bind em <code>Aluno</code> e envia para <code>/alunos/salvar</code>.</li>
+            <li>Mostrar que RA e oculto no front e preenchido via script com base no CPF.</li>
+            <li>Concluir com o contrato front-back (campos e endpoints).</li>
+        </ol>
+    </section>
+
+    <p class="footer">
+        Arquivo gerado para apoio de apresentacao tecnica do modulo de front.
+    </p>
+</div>
+</body>
+</html>
+

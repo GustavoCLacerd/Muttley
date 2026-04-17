@@ -25,13 +25,12 @@ public class MedalhaService {
                                .stream().anyMatch(c -> c.getMedalha().equals(m));
 
             if (!jaPossui) {
-                if ((m.getTipoRequisito() == TipoSkill.HARD_SKILL && aluno.getSaldoHardSkill() >= m.getPontosNecessarios()) ||
-                    (m.getTipoRequisito() == TipoSkill.SOFT_SKILL && aluno.getSaldoSoftSkill() >= m.getPontosNecessarios())) {
-                    
+                if (m.verificarElegibilidade(aluno)) {
                     Conquista nova = new Conquista();
                     nova.setAluno(aluno);
                     nova.setMedalha(m);
                     nova.setDataConquista(LocalDate.now());
+                    nova.setUrlCompartilhamento(nova.gerarLinkCompartilhamento());
                     conquistaRepository.save(nova);
                 }
             }

@@ -22,7 +22,7 @@ public abstract class Evento {
     public Evento() {}
 
     // Método que será implementado pelas subclasses para definir a pontuação
-    public abstract Integer calcularPontos(Integer horas);
+    public abstract Integer calcularPontos();
 
     // Getters e Setters
     public Long getId() { return id; }

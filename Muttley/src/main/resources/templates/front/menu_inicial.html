@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Muttley</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/front/muttley-front.css}">
+</head>
+<body>
+<main class="container py-4">
+    <section class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h1 class="h3 mb-3">Menu Muttley</h1>
+            <nav class="d-flex flex-wrap gap-2">
+                <button class="btn btn-outline-primary" type="button">Buscar</button>
+                <a class="btn btn-primary" th:href="@{/alunos/novo}">Novo Cadastro</a>
+                <button class="btn btn-outline-primary" type="button">Novo Evento</button>
+                <button class="btn btn-outline-primary" type="button">Participacao</button>
+            </nav>
+        </div>
+    </section>
+
+    <section class="row g-4">
+        <div class="col-lg-7">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">Busca de Aluno</h2>
+                    <form th:action="@{/alunos/buscar}" method="get" class="row g-3 align-items-end">
+                        <div class="col-md-5">
+                            <label for="cpfBusca" class="form-label">CPF</label>
+                            <input id="cpfBusca" name="cpf" class="form-control" placeholder="Digite o CPF" required>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-dark w-100" type="submit">Buscar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="h5">Importar Lista</h2>
+                    <p class="text-muted mb-0">
+                        Alem do cadastro manual, o sistema permitira a importacao de dados em lote.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

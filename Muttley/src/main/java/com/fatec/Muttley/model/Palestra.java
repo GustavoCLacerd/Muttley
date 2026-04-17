@@ -12,7 +12,7 @@ public class Palestra extends Evento {
     public Palestra() {}
 
     @Override
-    public Integer calcularPontos(Integer horas) {
+    public Integer calcularPontos() {
         // Palestras geralmente têm pontuação fixa independente das horas
         return this.valorFixo;
     }

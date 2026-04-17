@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Cadastro</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/front/muttley-front.css}">
+</head>
+<body>
+<main class="container py-4 muttley-page">
+    <section class="card shadow-sm muttley-shell">
+        <div class="card-body">
+            <header class="muttley-header mb-4">
+                <h1 class="h4 mb-0">Aluno</h1>
+            </header>
+
+            <form th:action="@{/alunos/salvar}" th:object="${aluno}" method="post" class="muttley-form-grid">
+                <label for="nome" class="form-label mb-0">Nome</label>
+                <input id="nome" th:field="*{nome}" class="form-control" required>
+
+                <label for="cpf" class="form-label mb-0">CPF</label>
+                <input id="cpf" th:field="*{cpf}" class="form-control" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" required>
+
+                <label for="curso" class="form-label mb-0">Curso</label>
+                <input id="curso" th:field="*{curso}" class="form-control" required>
+
+                <label for="email" class="form-label mb-0">EMAIL</label>
+                <input id="email" th:field="*{email}" class="form-control" type="email">
+
+                <div class="muttley-actions">
+                    <button class="btn btn-muttley-primary" type="submit">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+<script>
+    const cpfInput = document.getElementById("cpf");
+
+    const aplicarMascaraCpf = (valor) => {
+        const numeros = valor.replace(/\D/g, "").slice(0, 11);
+        return numeros
+            .replace(/^(\d{3})(\d)/, "$1.$2")
+            .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+            .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+    };
+
+    if (cpfInput) {
+        const aplicarNoCampoCpf = () => {
+            cpfInput.value = aplicarMascaraCpf(cpfInput.value);
+        };
+
+        aplicarNoCampoCpf();
+        cpfInput.addEventListener("input", aplicarNoCampoCpf);
+    }
+</script>
+</body>
+</html>

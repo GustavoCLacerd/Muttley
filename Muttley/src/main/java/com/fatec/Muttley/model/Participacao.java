@@ -19,10 +19,7 @@ public class Participacao {
     private Evento evento;
 
     private LocalDate dataParticipacao;
-    
-    // Atributo essencial para o cálculo de pontos e certificados
-    private Integer horas; 
-    
+
     private String usuarioResponsavel;
 
     public Participacao() {}
@@ -36,8 +33,10 @@ public class Participacao {
     public void setEvento(Evento evento) { this.evento = evento; }
     public LocalDate getDataParticipacao() { return dataParticipacao; }
     public void setDataParticipacao(LocalDate dataParticipacao) { this.dataParticipacao = dataParticipacao; }
-    public Integer getHoras() { return horas; }
-    public void setHoras(Integer horas) { this.horas = horas; }
     public String getUsuarioResponsavel() { return usuarioResponsavel; }
     public void setUsuarioResponsavel(String usuarioResponsavel) { this.usuarioResponsavel = usuarioResponsavel; }
+
+    public boolean validarParticipacao() {
+        return aluno != null && evento != null && dataParticipacao != null;
+    }
 }

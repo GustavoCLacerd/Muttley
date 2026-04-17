@@ -39,4 +39,17 @@ public class Conquista {
     public void setUrlCompartilhamento(String urlCompartilhamento) { this.urlCompartilhamento = urlCompartilhamento; }
     public Boolean getPostLinkedIn() { return postLinkedIn; }
     public void setPostLinkedIn(Boolean postLinkedIn) { this.postLinkedIn = postLinkedIn; }
+
+    public String gerarLinkCompartilhamento() {
+        if (urlCompartilhamento == null || urlCompartilhamento.isBlank()) {
+            String medalhaId = medalha != null && medalha.getId() != null ? medalha.getId().toString() : "sem-medalha";
+            String alunoId = aluno != null && aluno.getId() != null ? aluno.getId().toString() : "sem-aluno";
+            urlCompartilhamento = "https://muttley.local/conquista/" + alunoId + "/" + medalhaId;
+        }
+        return urlCompartilhamento;
+    }
+
+    public void enviarNotificacao() {
+        this.postLinkedIn = Boolean.TRUE;
+    }
 }
