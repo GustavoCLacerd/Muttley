@@ -14,24 +14,93 @@ public class AlunoController {
     @Autowired
     private AlunoRepository alunoRepository;
 
-    // Rota para abrir a tela de cadastro (vazia)
+    // =============================
+    // NOVO CADASTRO
+    // =============================
     @GetMapping("/novo")
-    public String exibirFormularioCadastro(Model model) {
+    public String novoAluno(Model model) {
         model.addAttribute("aluno", new Aluno());
-        return "cadastro_aluno"; // Nome do arquivo HTML que o grupo vai criar
+        return "front/cadastro_aluno";
     }
 
-    // Rota para salvar o aluno vindo do formulário
+    // =============================
+    // SALVAR (NOVO + EDICAO)
+    // =============================
     @PostMapping("/salvar")
     public String salvarAluno(@ModelAttribute Aluno aluno) {
-        alunoRepository.save(aluno);
-        return "redirect:/"; // Volta para o menu principal
+
+        // Padroniza CPF no formato xxx.xxx.xxx-xx antes de persistir.
+        if (aluno.getCpf() != null) {
+            String cpfFormatado = aluno.getCpf()
+                    .replaceAll("\\D", "")
+                    .replaceFirst("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+            aluno.setCpf(cpfFormatado);
+        }
+
+        if (aluno.getId() != null) {
+            // Edicao: recarrega o aluno existente e atualiza somente os campos da tela
+            Aluno alunoBanco = alunoRepository.findById(aluno.getId()).orElse(null);
+
+            if (alunoBanco != null) {
+                alunoBanco.setNome(aluno.getNome());
+                alunoBanco.setCpf(aluno.getCpf());
+                alunoBanco.setCurso(aluno.getCurso());
+                alunoBanco.setEmail(aluno.getEmail());
+                alunoBanco.setSaldoHardSkill(aluno.getSaldoHardSkill());
+                alunoBanco.setSaldoSoftSkill(aluno.getSaldoSoftSkill());
+
+                alunoRepository.save(alunoBanco);
+            }
+        } else {
+            alunoRepository.save(aluno);
+        }
+
+        return "redirect:/";
     }
 
-    // Rota para buscar por CPF (como no botão 'Buscar' do Figma)
+    // =============================
+    // BUSCAR POR CPF
+    // =============================
     @GetMapping("/buscar")
     public String buscarPorCpf(@RequestParam String cpf, Model model) {
-        alunoRepository.findByCpf(cpf).ifPresent(aluno -> model.addAttribute("aluno", aluno));
-        return "detalhes_aluno";
+
+        String cpfFormatado = cpf
+                .replaceAll("\\D", "")
+                .replaceFirst("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+
+        Aluno aluno = alunoRepository.findByCpf(cpfFormatado).orElse(null);
+
+        if (aluno != null) {
+            model.addAttribute("aluno", aluno);
+        } else {
+            model.addAttribute("mensagem", "Aluno nao encontrado");
+        }
+
+        return "front/detalhes_aluno";
+    }
+
+    // =============================
+    // EDITAR
+    // =============================
+    @GetMapping("/editar/{id}")
+    public String editarAluno(@PathVariable Long id, Model model) {
+
+        Aluno aluno = alunoRepository.findById(id).orElse(null);
+
+        if (aluno == null) {
+            return "redirect:/";
+        }
+
+        model.addAttribute("aluno", aluno);
+        return "front/cadastro_aluno";
+    }
+
+    // =============================
+    // EXCLUIR
+    // =============================
+    @PostMapping("/excluir/{id}")
+    public String excluirAluno(@PathVariable Long id) {
+        alunoRepository.deleteById(id);
+        return "redirect:/";
     }
 }
