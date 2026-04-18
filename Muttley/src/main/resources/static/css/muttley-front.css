@@ -1,0 +1,187 @@
+body {
+    background: radial-gradient(circle at top, #f6f8fb 0%, #edf1f6 55%, #e8edf3 100%);
+    color: #1f2937;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.card {
+    border: 1px solid #d5dde8;
+    border-radius: 12px;
+    background: #f8fafd;
+    box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
+}
+
+.btn {
+    border-radius: 12px;
+    font-weight: 600;
+    min-width: 130px;
+    padding: 0.68rem 1.05rem;
+    border-width: 1px;
+    letter-spacing: 0.01em;
+    transition: transform 0.16s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.16);
+}
+
+.muttley-page {
+    max-width: 980px;
+}
+
+.muttley-shell {
+    padding: 0;
+    overflow: hidden;
+}
+
+.muttley-header {
+    border-bottom: 1px solid #d5dde8;
+    padding-bottom: 0.75rem;
+}
+
+.muttley-header h1 {
+    font-weight: 700;
+    color: #111827;
+}
+
+.muttley-form-grid {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1.6rem 1.2rem;
+    align-items: center;
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.muttley-form-grid--home {
+    max-width: 900px;
+}
+
+.form-label {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #c3cddb;
+    background: #fff;
+    min-height: 44px;
+    max-width: 560px;
+    padding: 0.58rem 0.85rem;
+    color: #111827;
+}
+
+.form-control:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.18);
+}
+
+.muttley-actions {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 0.95rem;
+    margin-top: 0.65rem;
+}
+
+.muttley-actions-search {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.muttley-actions-secondary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.95rem;
+    justify-content: flex-start;
+}
+
+.muttley-actions--home .muttley-actions-search,
+.muttley-actions--home .muttley-actions-secondary {
+    justify-content: center;
+}
+
+.muttley-actions--home .btn,
+.muttley-actions--home a.btn {
+    min-width: 165px;
+}
+
+.muttley-actions .btn,
+.muttley-actions a.btn {
+    text-decoration: none;
+}
+
+.muttley-actions .btn:focus-visible,
+.muttley-actions a.btn:focus-visible {
+    outline: 2px solid #1d4ed8;
+    outline-offset: 2px;
+}
+
+.btn-muttley-primary {
+    background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    border-color: #1e40af;
+}
+
+.btn-muttley-primary:hover {
+    background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
+    color: #ffffff;
+}
+
+.btn-muttley-secondary {
+    background: #ffffff;
+    color: #1f2937;
+    border-color: #9aa7bb;
+}
+
+.btn-muttley-secondary:hover {
+    background: #eff4fb;
+    color: #111827;
+    border-color: #64748b;
+}
+
+.btn-muttley-danger {
+    background: #ffffff;
+    color: #b91c1c;
+    border-color: #f3b8b8;
+}
+
+.btn-muttley-danger:hover {
+    background: #fff1f2;
+    color: #991b1b;
+    border-color: #ef4444;
+}
+
+.btn:disabled,
+.btn[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.alert-warning {
+    border: 1px solid #facc15;
+    background: #fef9c3;
+    color: #854d0e;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .muttley-form-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .form-control {
+        max-width: 100%;
+    }
+
+    .muttley-actions-search,
+    .muttley-actions-secondary {
+        justify-content: center;
+    }
+}

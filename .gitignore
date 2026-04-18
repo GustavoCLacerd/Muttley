@@ -1,0 +1,52 @@
+# =========================
+# IDEs
+# =========================
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+
+# =========================
+# Build - Maven / Gradle
+# =========================
+target/
+build/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# =========================
+# Java
+# =========================
+*.class
+*.log
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# =========================
+# Spring Boot DevTools
+# =========================
+.mvn/wrapper/maven-wrapper.jar
+
+# =========================
+# OS
+# =========================
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log.*
